@@ -5,7 +5,7 @@ const mailServer = require('./app/mailserver');
 
 // App setup
 const app = express();
-const { port } = process.env.PORT || config.SERVER_DETAILS;
+const port = process.env.PORT || config.SERVER_DETAILS.port;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
