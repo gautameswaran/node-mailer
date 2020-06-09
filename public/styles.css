@@ -1,0 +1,9 @@
+#main {
+    width: 600px;
+    margin: 20px auto;
+}
+#main .clsSpace {
+    margin: 15px;
+    padding: 5px;
+    width: 300px;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "node-mailer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gautameswaran/node-mailer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gautameswaran/node-mailer/issues"
+  },
+  "homepage": "https://github.com/gautameswaran/node-mailer#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mailgun-js": "^0.22.0",
+    "sib-api-v3-sdk": "^7.2.3"
+  },
+  "devDependencies": {
+    "mocha": "^7.2.0"
+  }
+}
