@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-- 12.16.1
+  - 12.16.1
+before_script:
+  - npm install
+script:
+  - npm start
 deploy:
   app: my-node-mailer
   provider: heroku
