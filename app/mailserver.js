@@ -17,7 +17,7 @@ apiKey.apiKey = sendiBlue.api_key;
 const partnerKey = defaultClient.authentications['partner-key'];
 partnerKey.apiKey = sendiBlue.api_key;
 
-const apiInstance = new SibApiV3Sdk.EmailCampaignsApi()
+const apiInstance = new SibApiV3Sdk.EmailCampaignsApi();
 
 // MailGun init config
 const DOMAIN = mailGun.domain;
@@ -38,11 +38,27 @@ const selectMailServer = () => {
     return activeServers[0];
 }
 
-module.exports.sendMail = ({
+module.exports.selectMailServer = selectMailServer;
+
+const updateMailServerStatus = (updateDetails) => {
+    const {
+        MAIL_SERVER_STATUS
+    } = config;
+    const updateIndex = MAIL_SERVER_STATUS.findIndex((server) => server.serverName === updateDetails.serverName);
+    if (updateIndex < 0) {
+        return false;
+    }
+
+    MAIL_SERVER_STATUS[updateIndex] = updateDetails;
+
+    return true;
+};
+
+const sendMail = ({
     to,
     subject,
     content
-}) => {
+}, retry = false) => {
     const data = {
         from: 'Gautam Eswaran <gautam@samples.mailgun.org>',
         to,
@@ -50,40 +66,58 @@ module.exports.sendMail = ({
         text: content
     };
 
-    console.log('data', data);
     const selectedServer = selectMailServer();
 
     if (!selectedServer) {
         return false;
     }
 
-    switch(selectedServer.serverName) {
+    switch (selectedServer.serverName) {
         case 'mailGun':
-            mailGunMailer(data);
+            return mailGunMailer(data, !retry);
             break;
         case 'sendiBlue':
-            sendiBlueMailer(data);
+            return sendiBlueMailer(data, !retry);
             break;
         default:
-            console.log('No mail server available');
+            return false;
     }
 
 };
 
-const mailGunMailer = (data) => {
-    mg.messages().send(data, function (error, body) {
-        console.log(body);
+module.exports.sendMail = sendMail;
+
+const mailGunMailer = (data, retry) => {
+    mg.messages().send(data, (error, body) => {
+        if (error) {
+            updateMailServerStatus({
+                serverName: 'mailGun',
+                enabled: false,
+            });
+            if(retry) {
+                sendMail(data, true);
+            }
+        }
+        // console.log(body);
     });
+    return true;
 };
 
 const sendiBlueMailer = (data) => {
     const emailTo = new SibApiV3Sdk.SendTestEmail();
     const campaignId = 1;
 
-    apiInstance.sendTestEmail(campaignId, emailTo).then(function () {
-        console.log('Mail sent successfully.');
-    }, function (error) {
+    apiInstance.sendTestEmail(campaignId, emailTo).then(() => {
+        // console.log('Mail sent successfully.');
+    }, (error) => {
         console.error(error);
+        updateMailServerStatus({
+            serverName: 'sendiBlue',
+            enabled: false,
+        });
+        if(retry) {
+            sendMail(data, true);
+        }
     });
+    return true;
 };
-
