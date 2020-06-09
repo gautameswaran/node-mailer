@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node mail server</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div id="main">
+        <h1>Node Mail server</h1>
+        <div>
+            <a href="/index.html" class="href">Home</a>
+            <storng> / Compose</storng>
+        </div>
+        <div>
+            <form method="POST" action="/sendmail">
+                <h2>
+                    New Mail
+                </h2>
+                <div>
+                    <strong>To:</strong> <br>
+                    <input type="text" name="to" id="to" class="clsSpace" value="" />
+                </div>
+                <div>
+                    <strong>Subject:</strong> <br>
+                    <input type="text" name="subject" id="subject" class="clsSpace" value="" />
+                </div>
+                <div>
+                    <strong>Content (plain text):</strong> <br>
+                    <textarea name="content" id="content" class="clsSpace" value="" cols="30" rows="5"></textarea>
+                </div>
+                <div>
+                    <input type="submit" name="mailsubmit" id="mailsubmit" />
+                    <a href="/index.html" name="discard" id="discard" style="text-decoration: none; font-size: 14px">Discard</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
