@@ -4,9 +4,7 @@ node_js:
 deploy:
   app: my-node-mailer
   provider: heroku
-  api_key:
-    secure: bLxG+BUaR7vIMLaE1uAjbYTHsjg9t4tBu2unWdTcG9z+17mvqHOZSbH1eROW1/2mSRY5AQ12sNY3uDBoCm/X9QffH4jGgdo3/v7Nmddu8qYPXM3s947ZF3ZRdW6yY5ae9AZFIY8HgbktxRKfQCu8CJ/hT0KlaqOcDl5SWot9C2v99NTcgzbLJO6NBdyFLw0sAW4ZLwzam2lw/BcToUXjQgt3EWRxBAL4R6+oZ9qdwHgjJ37JXY6c4FCdoOM+bskYeQU+u+JuOLEtyQTrKUWbbGIeVAgQTrJ7eeHC9Pc6T453l0+q/sOKrGoMmqpfCbk832JXgMdnegoT5YYp8el2YoVXrUbXhbqa4dIr7SJAMcF48lYQFECcztO7DMKbMQmbe0oX16ZPRzM4sZhMNBpwfWZeZgCrv4p7fkMyMNvs1W/XGu0gMMQcq9jY2AcEjlIg/HV9tvXMef7ljl1yo972KAwy4VLsEpeidSfPkIVcufG4GV/v3sCuiLmdRgllcKDfeLhV01Ro8mZ/+X858pM4JvDYtNkewxhkUklNN0aECfANBfB4ceNzUhHz3eJ9A4EMAiWNecVDj4r/2k3+7M8V72iQjZURuIlZn084n5h2rao1jFCMZSEWvVkVNjHkiafj7BPOCpw8pcrGQC1VeY8Llj7PDoaWaj4W0Qc0lW351fQ=
+  api_key: a4086297-b183-408e-af79-045838b40cd5
   run:
     - npm install
     - npm start
-after_success: npm run coverage
